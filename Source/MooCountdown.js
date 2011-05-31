@@ -22,14 +22,14 @@ Inspiration:
 	- Thanks to [tlkshadow] http://github.com/tlkshadow] for his correction
 
 Options:
-  - Container (string): ID of the HTML element which contains the countdown. Default : ‘countdown’
-  - futurDate (Timestamp in milliseconds): The countdown’s start in milliseconds. Minimal value = 1. Default : empty.
+  - Container (string): ID of the HTML element which contains the countdown. Default : 'countdown'
+  - futurDate (Timestamp in milliseconds): The countdown's start in milliseconds. Minimal value = 1. Default : empty.
   - OnlySeconds (Booleans): If the fixed value is true, there will not be a formatting days/hours/seconds. If you wish to create a countdown for only few seconds, give this value at true. Default : false.
   - dayText, hourText, minuteText, secondText (string): Text for the administration of internalization. Default, French value for day, hour, minute, second.
   - onCompleteText (string): Text displayed after the ended of the countdown. Default : null
-  - startFont: starting size of the text for the tween effect. Default : ’32px’
-  - finishFont: arrival size of the text for the tween effect. Default : ’16px’
-  - duration (int): length of the animation and the count of seconds. Default : ‘1000’
+  - startFont: starting size of the text for the tween effect. Default : '32px'
+  - finishFont: arrival size of the text for the tween effect. Default : '16px'
+  - duration (int): length of the animation and the count of seconds. Default : '1000'
 
 Events:
   - onComplete (function): Personalized function to trigger at the end of the countdown. Default : empty.
@@ -127,11 +127,10 @@ MooCountdown.Date = new Class({
       if( this.minutes > 0 ) {
           var elMinutes = new Element('span',{
             'id' : 'minutes',
-            'html' : "<span class=\"number\">"+this.minutes+"</span><span class=\"text\">"+this.options.text[3]+"</span>",
             'class': 'countdown_box'
           }).inject(this.Container);
-          new Element('span',{'html': this.minutes,'class':'number'}).inject(elHours);
-          new Element('span',{'html': this.options.text[3],'class':'text'}).inject(elHours);
+			new Element('span',{'html': this.minutes,'class':'number'}).inject(elMinutes);
+			new Element('span',{'html': this.options.text[3],'class':'text'}).inject(elMinutes);
       }
   
       var elSeconds = new Element('span',{
@@ -152,7 +151,8 @@ MooCountdown.Date = new Class({
                   this.fireEvent('complete');
               }
           }.bind(this)
-      }).start('font-size',[this.options.startFont,this.options.finishFont]); 
+      }).start('opacity',[100,100]);
+
   
   }
 
